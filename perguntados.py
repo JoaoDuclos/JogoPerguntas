@@ -1,8 +1,20 @@
 categories = {
-    'general': [{'pergunta':'Qual o nome do rei(a) da inglaterra?', 'resposta':'Rei Charles','alternativas':['Rainha Elizabeth', 'Rei Charles', 'Rei Arthur', 'Rei Do Mate']}],
-    'history': [{'pergunta':'Quem foi o nome mais famoso da revolução francesa?', 'resposta':'Napoleão','alternativas':['Napoleão', 'Hitler', 'Bejamin', 'Arthur']}],
-    'science': [{'pergunta':'Qual é o elemento mais abundante no universo?', 'resposta':'Hidrogênio','alternativas':['Oxigênio', 'Nitrogênio', 'Carbono', 'Hidrogênio']}],
-    'geography': [{'pergunta':'Qual é o maior país do mundo em área terrestre?', 'resposta':'Rússia','alternativas':['Canadá', 'Estados Unidos', 'China', 'Rússia']}]
+    'general': [
+        {'pergunta':'Qual o nome do rei(a) da inglaterra?', 'resposta':'Rei Charles','alternativas':['Rainha Elizabeth', 'Rei Charles', 'Rei Arthur', 'Rei Do Mate']}
+        ],
+    'history': [
+        {'pergunta':'Quem foi o nome mais famoso da revolução francesa?', 'resposta':'Napoleão','alternativas':['Napoleão', 'Hitler', 'Bejamin', 'Arthur']}
+        ],
+    'science': [
+        {'pergunta':'Qual é o elemento mais abundante no universo?', 'resposta':'Hidrogênio','alternativas':['Oxigênio', 'Nitrogênio', 'Carbono', 'Hidrogênio']}
+        ],
+    'geography': [
+        {'pergunta':'Qual é o maior país do mundo em área terrestre?', 'resposta':'Rússia','alternativas':['Canadá', 'Estados Unidos', 'China', 'Rússia']}
+        ],
+    'sport': [
+        {'pergunta':'Qual foi o país que ganhou a primeira copa do mundo?', 'resposta':'Uruguai','alternativas':['França', 'Uruguai', 'Brasil', 'Holanda']},
+        {'pergunta':'Quem é o jogador com mais títulos na história do futebol?', 'resposta':'Messi','alternativas':['Messi', 'Puskás', 'Pelé', 'Zidane']}
+        ]
 }
 
 for i, category in enumerate(categories):
@@ -28,4 +40,8 @@ elif cat == 3:
     makingTheQuestion('science')
 elif cat == 4:
     makingTheQuestion('geography')
+elif cat == 5:
+    makingTheQuestion('sport')
+else:
+    print('Opção inválida')
 
