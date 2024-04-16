@@ -1,4 +1,5 @@
 import time
+import random
 categories = {
     'general': [
         {'pergunta':'Qual o nome do rei(a) da inglaterra?', 'resposta':'Rei Charles','alternativas':['Rainha Elizabeth', 'Rei Charles', 'Rei Arthur', 'Rei Do Mate']},
@@ -76,29 +77,68 @@ categories = {
 
 for i, category in enumerate(categories):
     print(f'{i+1}) {category}')
+print(f'6) Jogar')
 cat = int(input('Qual genero você deseja? '))
 
-def makingTheQuestion(cat):
+options = ['general', 'history', 'science', 'geography', 'sport']
+
+def makingAllQuestions(cat):
     for pergunta in categories[cat]:
-        print(pergunta['pergunta'])
-        for i, auternativa in enumerate(pergunta['alternativas']):
-            print(f'{i+1}) {auternativa}')
-        resposta = int(input('Resposta: '))
+        makingTheQuestion(pergunta)
+
+def makingTheQuestion(pergunta):
+    print(pergunta['pergunta'])
+    for i, alternativa in enumerate(pergunta['alternativas']):
+        print(f'{i+1}) {alternativa}')
+    resposta = int(input('Resposta: '))
+    if resposta in [1, 2, 3, 4]:
         if pergunta['resposta'] == pergunta['alternativas'][resposta-1]:
-            print('Resposta Certa')
+            print('\nResposta Certa\n')
+            time.sleep(1)
+            return 1
         else:
-            print('Resposta Errada')
+            print('\nResposta Errada\n')
+            time.sleep(1)
+            return 0
+    else:
+        print('Opção tem que estar entre 1 e 4')
+
+
+def playGame():
+    life = 3
+    i=0
+    while i < 10:
+        i+=1
+        categorie = options[random.randint(0,4)]
+        result = makingTheQuestion(categories[categorie][random.randint(0, len(categories[categorie])-1)])
+        if result:
+            print(f'Você tem {life} vidas\n')
+            time.sleep(1)
+        else:
+            life-=1
+            print(f'Você tem {life} vidas\n')
+            time.sleep(1)
+        if life == 0:
+            break
+    if life == 0:
+        print('Você perdeu!')
+    else:
+        print('Você ganhou!')
+
+
 
 if cat == 1:
-    makingTheQuestion('general')
+    makingAllQuestions(options[0])
 elif cat == 2:
-    makingTheQuestion('history')
+    makingAllQuestions(options[1])
 elif cat == 3:
-    makingTheQuestion('science')
+    makingAllQuestions(options[2])
 elif cat == 4:
-    makingTheQuestion('geography')
+    makingAllQuestions(options[3])
 elif cat == 5:
-    makingTheQuestion('sport')
+    makingAllQuestions(options[4])
+elif cat == 6:
+    playGame()
 else:
     print('Opção inválida')
 
