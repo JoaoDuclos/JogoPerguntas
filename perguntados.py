@@ -47,7 +47,7 @@ categories = {
         {'pergunta':'Qual é o maior país do mundo em área terrestre?', 'resposta':'Rússia','alternativas':['Canadá', 'Estados Unidos', 'China', 'Rússia']},
         {'pergunta':'Qual é o rio mais longo do mundo?', 'resposta':'Rio Amazonas','alternativas':['Rio Nilo', 'Rio Amazonas', 'Rio Mississipi', 'Rio Yangtzé']},
         {'pergunta':'Qual é o maior oceano do mundo?', 'resposta':'Oceano Pacífico','alternativas':['Oceano Atlântico', 'Oceano Índico', 'Oceano Pacífico', 'Oceano Ártico']},
-        {'pergunta':'Qual é o país mais populoso do mundo?', 'resposta':'China','alternativas':['Índia', 'Estados Unidos', 'China', 'Indonésia']},
+        {'pergunta':'Qual é o país mais populoso do mundo?', 'resposta':'Índia','alternativas':['Índia', 'Estados Unidos', 'China', 'Indonésia']},
         {'pergunta':'Qual é o deserto mais quente do mundo?', 'resposta':'Deserto do Saara','alternativas':['Deserto do Atacama', 'Deserto do Saara', 'Deserto de Gobi', 'Deserto da Arábia']},
         {'pergunta':'Qual é a maior ilha do mundo?', 'resposta':'Groenlândia','alternativas':['Austrália', 'Groenlândia', 'Nova Guiné', 'Borneo']},
         {'pergunta':'Qual é o maior arquipélago do mundo?', 'resposta':'Indonésia','alternativas':['Filipinas', 'Indonésia', 'Japão', 'Havaí']},
@@ -103,13 +103,12 @@ def makingTheQuestion(pergunta):
     else:
         print('Opção tem que estar entre 1 e 4')
 
-
 def playGame():
     life = 3
     i=0
     while i < 10:
         i+=1
-        categorie = options[random.randint(0,4)]
+        categorie = options[random.randint(0,len(categories)-1)]
         result = makingTheQuestion(categories[categorie][random.randint(0, len(categories[categorie])-1)])
         if result:
             print(f'Você tem {life} vidas\n')
@@ -124,8 +123,6 @@ def playGame():
         print('Você perdeu!')
     else:
         print('Você ganhou!')
-
-
 
 if cat == 1:
     makingAllQuestions(options[0])
