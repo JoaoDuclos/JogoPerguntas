@@ -1,13 +1,11 @@
 import time
 import random
-from categorias import categories
+from categorias import categories, options
 
 for i, category in enumerate(categories):
     print(f'{i+1}) {category}')
 print(f'6) Jogar')
 cat = int(input('Qual genero você deseja? '))
-
-options = list(categories.keys())
 
 def makingAllQuestions(cat):
     for pergunta in categories[cat]:
@@ -15,6 +13,7 @@ def makingAllQuestions(cat):
 
 def makingTheQuestion(pergunta):
     print(pergunta['pergunta'])
+    print()
     for i, alternativa in enumerate(pergunta['alternativas']):
         print(f'{i+1}) {alternativa}')
     resposta = int(input('Resposta: '))
@@ -33,9 +32,16 @@ def makingTheQuestion(pergunta):
 def playGame():
     life = 3
     i=0
+    print('São 10 perguntas!')
+    time.sleep(1)
+    print('Responda com cuidado!')
+    time.sleep(1)
     while i < 10:
         i+=1
         categorie = options[random.randint(0,len(categories)-1)]
+        time.sleep(1)
+        print()
+        print(f'{i})', end=' ')
         result = makingTheQuestion(categories[categorie][random.randint(0, len(categories[categorie])-1)])
         if result:
             print(f'Você tem {life} vidas\n')
@@ -65,4 +71,3 @@ elif cat == 6:
     playGame()
 else:
     print('Opção inválida')
-

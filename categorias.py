@@ -72,3 +72,5 @@ categories = {
         {'pergunta':'Qual é o esporte mais popular nos Jogos Olímpicos de Inverno?', 'resposta':'Patinagem Artística','alternativas':['Esqui Alpino', 'Patinagem de Velocidade', 'Hóquei no Gelo', 'Patinagem Artística']}
     ]
 }
+
+options = list(categories.keys())
