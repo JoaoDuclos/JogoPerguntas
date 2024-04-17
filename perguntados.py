@@ -8,6 +8,8 @@ def makingAllQuestions(cat):
     for pergunta in categories[cat]:
         makingTheQuestion(pergunta)
 
+
+# Função para apresentar uma pergunta e verificar a resposta do usuário
 def makingTheQuestion(pergunta):
     print(pergunta['pergunta'])
     print()
@@ -30,9 +32,9 @@ def playGame():
     life = 3
     i=0
     print('São 10 perguntas!')
-    time.sleep(1)
     print('Responda com cuidado!')
     time.sleep(1)
+    # Controla o fluxo do jogo, determina as vidas do jogador e itera sobre 10 perguntas aleatórias de diferentes categorias
     while i < 10:
         i+=1
         categorie = options[random.randint(0,len(categories)-1)]
@@ -55,11 +57,13 @@ def playGame():
         print('Você ganhou!')
 
 def main():
+    # Exibe as opções de categoria para o jogador escolher ou a opção de jogar diretamente
     for i, category in enumerate(categories):
         print(f'{i+1}) {category}')
     print(f'6) Jogar')
     cat = int(input('Qual genero você deseja? '))
-
+    
+    # Chama makingAllQuestions com base na categoria escolhida pelo jogador ou inicia o jogo diretamente
     if cat == 1:
         makingAllQuestions(options[0])
     elif cat == 2:
