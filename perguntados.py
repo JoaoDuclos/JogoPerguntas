@@ -28,7 +28,8 @@ def makingTheQuestion(pergunta):
     else:
         print('Opção tem que estar entre 1 e 4')
 
-def playGame():
+# recebe a cópia como parametro para poder remover a pergunta após ser respondida evitando duplicatas
+def playGame(available_questions):
     life = 3
     i=0
     print('São 10 perguntas!')
@@ -41,7 +42,7 @@ def playGame():
         time.sleep(1)
         print()
         print(f'{i})', end=' ')
-        result = makingTheQuestion(categories[categorie][random.randint(0, len(categories[categorie])-1)])
+        result = makingTheQuestion(available_questions[categorie].pop(random.randint(0, len(available_questions[categorie])-1)))
         if result:
             print(f'Você tem {life} vidas\n')
             time.sleep(1)
@@ -57,7 +58,8 @@ def playGame():
         print('Você ganhou!')
 
 def main():
-    # Exibe as opções de categoria para o jogador escolher ou a opção de jogar diretamente
+    #copia do dicionario com as perguntas
+    available_questions = categories.copy()
     for i, category in enumerate(categories):
         print(f'{i+1}) {category}')
     print(f'6) Jogar')
@@ -75,7 +77,7 @@ def main():
     elif cat == 5:
         makingAllQuestions(options[4])
     elif cat == 6:
-        playGame()
+        playGame(available_questions)
     else:
         print('Opção inválida')
 
