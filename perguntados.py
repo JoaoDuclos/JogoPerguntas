@@ -2,10 +2,7 @@ import time
 import random
 from categorias import categories, options
 
-for i, category in enumerate(categories):
-    print(f'{i+1}) {category}')
-print(f'6) Jogar')
-cat = int(input('Qual genero você deseja? '))
+
 
 def makingAllQuestions(cat):
     for pergunta in categories[cat]:
@@ -57,17 +54,26 @@ def playGame():
     else:
         print('Você ganhou!')
 
-if cat == 1:
-    makingAllQuestions(options[0])
-elif cat == 2:
-    makingAllQuestions(options[1])
-elif cat == 3:
-    makingAllQuestions(options[2])
-elif cat == 4:
-    makingAllQuestions(options[3])
-elif cat == 5:
-    makingAllQuestions(options[4])
-elif cat == 6:
-    playGame()
-else:
-    print('Opção inválida')
+def main():
+    for i, category in enumerate(categories):
+        print(f'{i+1}) {category}')
+    print(f'6) Jogar')
+    cat = int(input('Qual genero você deseja? '))
+
+    if cat == 1:
+        makingAllQuestions(options[0])
+    elif cat == 2:
+        makingAllQuestions(options[1])
+    elif cat == 3:
+        makingAllQuestions(options[2])
+    elif cat == 4:
+        makingAllQuestions(options[3])
+    elif cat == 5:
+        makingAllQuestions(options[4])
+    elif cat == 6:
+        playGame()
+    else:
+        print('Opção inválida')
+
+if __name__ == "__main__":
+    main()
