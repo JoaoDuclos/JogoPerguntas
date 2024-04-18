@@ -1,7 +1,7 @@
 import time
 import random
 from categorias import categories, options
-
+from classes import *
 
 
 def makingAllQuestions(cat):

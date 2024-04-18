@@ -1,48 +1,76 @@
 import pygame
+import sys
 
 pygame.init()
-pygame.display.set_caption("JogoPerguntas")
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-player = pygame.Rect((300, 250, 50, 50))
-clock = pygame.time.Clock()
 
-test_fonts = pygame.font.Font(None, 50)
+WIDTH = 800
+HEIGHT = 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Perguntados")
 
-test_surface = pygame.Surface((800,100))
-test_surface.fill('purple')
-text_surface = test_fonts.render('Jogo de perguntas', False, 'white')
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+BLUE = (106, 159, 181)
+GREEN = (155, 206, 120)
 
-moving_surface = pygame.Surface((50,50))
-msX_position = 750
+title_font = pygame.font.SysFont('comicsans', 60)
+text_font = pygame.font.SysFont('comicsans', 30)
 
+def initial_screen():
+    screen.fill(WHITE)
+    
+    mouse_position = pygame.mouse.get_pos()
 
-button_1 = pygame.Surface((100,100))
-button_2 = pygame.Surface((100,100))
-button_3 = pygame.Surface((100,100))
-button_4 = pygame.Surface((100,100))
-
-run = True
-while run:
-
-    screen.fill('black')
-    for event in pygame.event.get():
-        print(event)
-        if event.type == pygame.QUIT:
-            run = False
-
-    screen.blit(test_surface, (0,0))
-    screen.blit(text_surface,(200,20))
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        msX_position -= 3
-
-    screen.blit(moving_surface, (msX_position, 200))
-    moving_surface.fill('white')
-    if msX_position < -60:
-        msX_position = 800
+    title_text = title_font.render("Perguntados", True, BLACK)
+    title_rect = title_text.get_rect(center=(WIDTH/2, HEIGHT/4))
+    screen.blit(title_text, title_rect)
+    
+    # Instructions
+    instructions_text1 = text_font.render("Precione espaço para começar", True, BLACK)
+    instructions_rect1 = instructions_text1.get_rect(center=(WIDTH/2, HEIGHT/2))
+    screen.blit(instructions_text1, instructions_rect1)
+    
+    instructions_text2 = text_font.render("Precione Q para sair", True, BLACK)
+    instructions_rect2 = instructions_text2.get_rect(center=(WIDTH/2, HEIGHT/2 + 50))
+    screen.blit(instructions_text2, instructions_rect2)
 
     pygame.display.update()
-    clock.tick(60)
 
-pygame.quit()
+def display_message(message):
+    # Display a message on the screen
+    text = text_font.render(message, True, BLACK)
+    text_rect = text.get_rect(center=(WIDTH/2, HEIGHT/2))
+    screen.blit(text, text_rect)
+    pygame.display.update()
+
+def draw_start_screen():
+    screen.fill(WHITE)
+    
+    # Message text
+    message_text = text_font.render("São 10 perguntas!", True, BLACK)
+    message_rect = message_text.get_rect(center=(WIDTH/2, HEIGHT/2))
+    screen.blit(message_text, message_rect)
+
+    pygame.display.update()
+
+# Main loop
+def main():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    # Start the game
+
+                    draw_start_screen()
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+
+        initial_screen()
+
+if __name__ == "__main__":
+    main()
