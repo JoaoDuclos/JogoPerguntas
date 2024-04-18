@@ -58,6 +58,9 @@ def checkingAnswer(pergunta, resposta):
 
 # Gera todas as perguntas de uma categoria
 def makingAllQuestions(cat):
+    print('Você terá 10 segundos para responder cada pergunta')
+    time.sleep(1)
+    print()
     for pergunta in categories[cat]:
         makingTheQuestion(pergunta)
 
@@ -99,7 +102,6 @@ def main():
         print(f'{i+1}) {category}')
     print(f'6) Jogar')
     cat = int(input('Qual genero você deseja? '))
-    
     # Chama makingAllQuestions com base na categoria escolhida pelo jogador ou inicia o jogo diretamente
     if cat == 1:
         makingAllQuestions(options[0])
