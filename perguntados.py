@@ -9,7 +9,7 @@ def get_user_input() -> int:
         try:
             resposta = int(input('Resposta: '))
         except ValueError:
-            print('Opção tem que estar entre 1 e 4')
+            print('Selecione uma das opções')
         else:
             break
     return resposta
@@ -101,7 +101,7 @@ def main():
     for i, category in enumerate(categories):
         print(f'{i+1}) {category}')
     print(f'6) Jogar')
-    cat = int(input('Qual genero você deseja? '))
+    cat = get_user_input()
     # Chama makingAllQuestions com base na categoria escolhida pelo jogador ou inicia o jogo diretamente
     if cat == 1:
         makingAllQuestions(options[0])
