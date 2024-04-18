@@ -4,9 +4,15 @@ import random
 from categorias import categories, options
 #from classes import *
 
-def get_user_input():
-    resposta = input('Resposta: ')
-    return resposta.strip()
+def get_user_input() -> int:
+    while True:
+        try:
+            resposta = int(input('Resposta: '))
+        except ValueError:
+            print('Opção tem que estar entre 1 e 4')
+        else:
+            break
+    return resposta
 
 # Roda um timer de um tempo determinado em segundos
 def timer(duration, user_input_event):
@@ -34,7 +40,6 @@ def askingQuestionTimer():
     resposta = get_user_input()
     user_input_event.set()  
     if resposta:
-        resposta = int(resposta)
         if resposta in [1, 2, 3, 4]:
             return resposta
         print('Opção tem que estar entre 1 e 4')
