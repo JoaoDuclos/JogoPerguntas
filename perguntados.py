@@ -8,6 +8,7 @@ def get_user_input():
     resposta = input('Resposta: ')
     return resposta.strip()
 
+# Roda um timer de um tempo determinado em segundos
 def timer(duration, user_input_event):
     start_time = time.time()
     end_time = start_time + duration
@@ -16,50 +17,58 @@ def timer(duration, user_input_event):
             return
     print('Seu tempo acabou.')
 
-def makingAllQuestions(cat):
-    for pergunta in categories[cat]:
-        makingTheQuestion(pergunta)
-
-
-# Função para apresentar uma pergunta e verificar a resposta do usuário
-def makingTheQuestion(pergunta):
+# Printa as perguntas e alternativas
+def printingQuestion(pergunta):   
     print(pergunta['pergunta'])
     print()
     for i, alternativa in enumerate(pergunta['alternativas']):
         print(f'{i+1}) {alternativa}')
 
+# Faz a pergunta e começa o timer, se o timer acabar a questão é dada como erro
+def askingQuestionTimer():
+    SEGUNDOS = 10
     user_input_event = threading.Event()
-    timer_thread = threading.Thread(target=timer, args=(10, user_input_event))
+    timer_thread = threading.Thread(target=timer, args=(SEGUNDOS, user_input_event))
     timer_thread.start()
 
     resposta = get_user_input()
-    user_input_event.set()  # Signal to stop the timer thread
-
+    user_input_event.set()  
     if resposta:
         resposta = int(resposta)
         if resposta in [1, 2, 3, 4]:
-            if pergunta['resposta'] == pergunta['alternativas'][resposta-1]:
-                print('\nResposta Certa\n')
-                time.sleep(1)
-                return 1
-            else:
-                print('\nResposta Errada\n')
-                time.sleep(1)
-                return 0
-        else:
-            print('Opção tem que estar entre 1 e 4')
+            return resposta
+        print('Opção tem que estar entre 1 e 4')
     return 0
+        
+# Checa se a resposta fornecida e retorna 1 se for correta e 0 caso contrario
+def checkingAnswer(pergunta, resposta):
+    if pergunta['resposta'] == pergunta['alternativas'][resposta-1]:
+        print('\nResposta Certa\n')
+        time.sleep(1)
+        return 1
+    else:
+        print('\nResposta Errada\n')
+        time.sleep(1)
+        return 0
 
-# recebe a cópia como parametro para poder remover a pergunta após ser respondida evitando duplicatas
+# Gera todas as perguntas de uma categoria
+def makingAllQuestions(cat):
+    for pergunta in categories[cat]:
+        makingTheQuestion(pergunta)
+
+
+def makingTheQuestion(pergunta):
+    printingQuestion(pergunta)
+    resposta = askingQuestionTimer()
+    return checkingAnswer(pergunta, resposta)
+
+
 def playGame(available_questions):
     life = 3
-    i=0
     print('São 10 perguntas!')
     print('Você terá 10 segundos para responder cada pergunta')
     time.sleep(1)
-    # Controla o fluxo do jogo, determina as vidas do jogador e itera sobre 10 perguntas aleatórias de diferentes categorias
-    while i < 10:
-        i+=1
+    for i in range(1,11):
         categorie = options[random.randint(0,len(categories)-1)]
         time.sleep(1)
         print()
@@ -80,7 +89,6 @@ def playGame(available_questions):
         print('Você ganhou!')
 
 def main():
-    #copia do dicionario com as perguntas
     available_questions = categories.copy()
     for i, category in enumerate(categories):
         print(f'{i+1}) {category}')
