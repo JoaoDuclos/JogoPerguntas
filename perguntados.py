@@ -2,7 +2,7 @@ import time
 import threading
 import random
 from categorias import categories, options
-#from classes import *
+from classes import *
 
 def get_user_input() -> int:
     while True:
