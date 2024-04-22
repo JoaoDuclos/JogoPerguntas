@@ -27,10 +27,9 @@ class Button():
         else:
             screen.blit(self.image, self.rect)
 
-button_surface = pygame.image.load("menubutton/largebuttons/largebuttons/Continue Button.png")
+button_surface = pygame.image.load("menubutton\largebuttons\largebuttons\continue_button.png")
 button_surface = pygame.transform.scale(button_surface, (400, 150))
-
-button_press_surface = pygame.image.load("menubutton/largebuttons/coloredlargebuttons/Continue  col_Button.png")
+button_press_surface = pygame.image.load("menubutton\largebuttons\coloredlargebuttons\continue_colbutton.png")
 button_press_surface = pygame.transform.scale(button_press_surface, (400, 150))
 
 button = Button(button_surface, button_press_surface, 400, 300)
