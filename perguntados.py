@@ -2,9 +2,9 @@ import time
 import threading
 import random
 from categorias import categories, options
-from classes import *
+from timer import Timer
 
-def get_user_input() -> int:
+def get_user_input():
     while True:
         try:
             resposta = int(input('Resposta: '))
@@ -13,15 +13,6 @@ def get_user_input() -> int:
         else:
             break
     return resposta
-
-# Roda um timer de um tempo determinado em segundos
-def timer(duration, user_input_event):
-    start_time = time.time()
-    end_time = start_time + duration
-    while time.time() < end_time:
-        if user_input_event.is_set():
-            return
-    print('Seu tempo acabou.')
 
 # Printa as perguntas e alternativas
 def printingQuestion(pergunta):   
@@ -33,12 +24,10 @@ def printingQuestion(pergunta):
 # Faz a pergunta e começa o timer, se o timer acabar a questão é dada como erro
 def askingQuestionTimer():
     SEGUNDOS = 10
-    user_input_event = threading.Event()
-    timer_thread = threading.Thread(target=timer, args=(SEGUNDOS, user_input_event))
-    timer_thread.start()
-
+    timer = Timer(SEGUNDOS)
+    timer.start()
     resposta = get_user_input()
-    user_input_event.set()  
+    timer.stop()  
     if resposta:
         if resposta in [1, 2, 3, 4]:
             return resposta
