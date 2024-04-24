@@ -7,7 +7,11 @@ from timer import Timer
 def get_user_input():
     while True:
         try:
-            resposta = int(input('Resposta: '))
+            resposta = input('Resposta: ')
+            if resposta == '':
+                resposta = 0
+                break
+            resposta = int(resposta)
         except ValueError:
             print('Selecione uma das opções')
         else:
