@@ -7,6 +7,7 @@ class Timer:
     def __init__(self, duration):
         self.duration = duration
         self.user_input_event = threading.Event()
+        self.times_up = False
 
     # Metodo privado que serve para calcular o tempo final de acrodo com a duração e checar continuamente se start_time passou do tempo final
     # Se user_input_event é set, a função retorna, caso contrario printa a mensagem
@@ -17,6 +18,7 @@ class Timer:
             if self.user_input_event.is_set():
                 return
         print('Seu tempo acabou.')
+        self.times_up = True
 
     # Cria uma thread para poder rodar em paralelo com a pergunta e inicializa ela
     def start(self):
@@ -26,4 +28,7 @@ class Timer:
     # Indica que o temporizador tem que parar
     def stop(self):
         self.user_input_event.set()
+    
+    def is_time_up(self):
+        return self.times_up
 

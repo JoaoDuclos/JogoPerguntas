@@ -1,7 +1,7 @@
 import time
-import threading
 import random
 from categorias import categories, options
+from  classes import Button
 from timer import Timer
 
 def get_user_input():
@@ -26,17 +26,17 @@ def printingQuestion(pergunta):
         print(f'{i+1}) {alternativa}')
 
 # Faz a pergunta e começa o timer, se o timer acabar a questão é dada como erro
-def askingQuestionTimer():
-    SEGUNDOS = 10
-    timer = Timer(SEGUNDOS)
+def askingQuestionTimer(duration):
+    timer = Timer(duration)
     timer.start()
     resposta = get_user_input()
-    timer.stop()  
-    if resposta:
+    timer.stop()
+    if resposta and timer.is_time_up() == False:
         if resposta in [1, 2, 3, 4]:
             return resposta
         print('Opção tem que estar entre 1 e 4')
-    return 0
+    print('O tempo acabou sua resposta será invalida')
+    return -1
         
 # Checa se a resposta fornecida e retorna 1 se for correta e 0 caso contrario
 def checkingAnswer(pergunta, resposta):
@@ -58,13 +58,17 @@ def makingAllQuestions(cat):
         makingTheQuestion(pergunta)
 
 
-def makingTheQuestion(pergunta):
+def makingTheQuestion(pergunta, duration):
     printingQuestion(pergunta)
-    resposta = askingQuestionTimer()
+    resposta = askingQuestionTimer(duration)
+    if resposta == -1:
+        print('Resposta Errada\n')
+        time.sleep(1)
+        return 0
     return checkingAnswer(pergunta, resposta)
 
 
-def playGame(available_questions):
+def playGame(available_questions, duration):
     life = 3
     print('São 10 perguntas!')
     print('Você terá 10 segundos para responder cada pergunta')
@@ -74,7 +78,7 @@ def playGame(available_questions):
         time.sleep(1)
         print()
         print(f'{i})', end=' ')
-        result = makingTheQuestion(available_questions[categorie].pop(random.randint(0, len(available_questions[categorie])-1)))
+        result = makingTheQuestion(available_questions[categorie].pop(random.randint(0, len(available_questions[categorie])-1)), duration)
         if result:
             print(f'Você tem {life} vidas\n')
             time.sleep(1)
@@ -95,19 +99,20 @@ def main():
         print(f'{i+1}) {category}')
     print(f'6) Jogar')
     cat = get_user_input()
+    duration = 5
     # Chama makingAllQuestions com base na categoria escolhida pelo jogador ou inicia o jogo diretamente
     if cat == 1:
-        makingAllQuestions(options[0])
+        makingAllQuestions(options[0], duration)
     elif cat == 2:
-        makingAllQuestions(options[1])
+        makingAllQuestions(options[1], duration)
     elif cat == 3:
-        makingAllQuestions(options[2])
+        makingAllQuestions(options[2], duration)
     elif cat == 4:
-        makingAllQuestions(options[3])
+        makingAllQuestions(options[3], duration)
     elif cat == 5:
-        makingAllQuestions(options[4])
+        makingAllQuestions(options[4], duration)
     elif cat == 6:
-        playGame(available_questions)
+        playGame(available_questions, duration)
     else:
         print('Opção inválida')
 
