@@ -21,8 +21,6 @@ text_font = pygame.font.SysFont('comicsans', 30)
 def play():
     pygame.display.set_caption("Perguntados")
 
-    screen.fill(BLACK)
-
     back_button_image = pygame.image.load("menubutton\squarebottons\squarebuttons\_back_quarebutton.png")
     back_button_surface = pygame.transform.scale(back_button_image, (50, 50))
     back_button_press_image = pygame.image.load("menubutton\squarebottons\coloredsquarebottons\_back_col_squarebutton.png")
